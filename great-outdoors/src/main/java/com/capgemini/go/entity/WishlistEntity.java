@@ -11,10 +11,10 @@ import javax.persistence.Table;
 @Table(name="user_wishlist")
 public class WishlistEntity {
 	// attributes
-	@Column(name = "userId", unique = true, nullable = false)
+	@Column(name = "USER_ID", unique = true, nullable = false)
 	private String userId;
 	
-	@Column(name = "productId", unique = true, nullable = false)
+	@Column(name = "PRODUCT_ID", unique = true, nullable = false)
 	private String productId;
 	
 	// getters
