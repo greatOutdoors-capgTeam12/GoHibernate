@@ -7,11 +7,9 @@ import org.hibernate.cfg.Configuration;
 import org.hibernate.cfg.Environment;
 import org.hibernate.service.ServiceRegistry;
 
-import com.capgemini.go.entity.RetailerInventoryEntity;
-
 public class HibernateUtil {
     private static SessionFactory sessionFactory;
-    public static SessionFactory getSessionFactory() {
+    public static SessionFactory getSessionFactory(Class<?> className) {
         if (sessionFactory == null) {
             try {
                 Configuration configuration = new Configuration();
@@ -26,7 +24,7 @@ public class HibernateUtil {
                 settings.put(Environment.CURRENT_SESSION_CONTEXT_CLASS, "thread");
                 settings.put(Environment.HBM2DDL_AUTO, "create-drop");
                 configuration.setProperties(settings);
-                configuration.addAnnotatedClass(RetailerInventoryEntity.class);
+                configuration.addAnnotatedClass(className);
                 ServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder()
                     .applySettings(configuration.getProperties()).build();
                 sessionFactory = configuration.buildSessionFactory(serviceRegistry);

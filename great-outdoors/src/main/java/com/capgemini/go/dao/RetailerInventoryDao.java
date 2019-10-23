@@ -10,7 +10,7 @@ import com.capgemini.go.util.HibernateUtil;
 public class RetailerInventoryDao {
     public void saveProductDetails (RetailerInventoryEntity retInvEntity) {
         Transaction transaction = null;
-        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+        try (Session session = HibernateUtil.getSessionFactory(RetailerInventoryEntity.class).openSession()) {
             // start a transaction
             transaction = session.beginTransaction();
             // save the student object
@@ -26,7 +26,7 @@ public class RetailerInventoryDao {
     }
     
     public List <RetailerInventoryEntity> getAllProducts() {
-        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+        try (Session session = HibernateUtil.getSessionFactory(RetailerInventoryEntity.class).openSession()) {
             return session.createQuery("from RetailerInventoryEntity", RetailerInventoryEntity.class).list();
         }
     }
