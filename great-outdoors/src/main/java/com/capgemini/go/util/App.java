@@ -2,6 +2,7 @@ package com.capgemini.go.util;
 
 import java.util.Calendar;
 import java.util.List;
+import java.util.TimeZone;
 
 import com.capgemini.go.dao.RetailerInventoryDao;
 import com.capgemini.go.entity.RetailerInventoryEntity;
@@ -12,7 +13,7 @@ public class App {
         
         RetailerInventoryDao retInvDao = new RetailerInventoryDao();
         for (int i = 0 ; i < 3; i++) {
-        	Calendar orderTimeStamp = Calendar.getInstance();
+        	Calendar orderTimeStamp = Calendar.getInstance(TimeZone.getTimeZone("UTC"));
         	String uid = "cat1uin000" + Integer.toString(i+1);
         	RetailerInventoryEntity retInvEntity = new RetailerInventoryEntity("ret01", (byte)1, uid, orderTimeStamp, orderTimeStamp, null);
         	retInvDao.saveProductDetails(retInvEntity);
