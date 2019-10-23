@@ -102,7 +102,7 @@ public class AddressEntity {
 	}
 
 	public AddressEntity() {
-		//
+
 	}
 
 	public AddressEntity(String addressId, String retailerId, String flatOrArea, String city, String state,

@@ -26,8 +26,6 @@ public class App {
 		products.forEach(s -> System.out.println(s.toString()));
 
 		AddressDao addressDao = new AddressDao();
-		// generate address id here instead of uid
-		// String uid = "cat1uin000" + Integer.toString(i+1);
 		AddressEntity addressEntity = new AddressEntity("SR01AD15", "SR01", "04, SHANTINAGAR", "MYSORE", "KARNATAKA",
 				"INDIA", "474252", true);
 		addressDao.saveAddress(addressEntity);

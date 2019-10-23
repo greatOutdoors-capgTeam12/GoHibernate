@@ -10,7 +10,8 @@ import com.capgemini.go.util.HibernateUtil;
 public class AddressDao {
     public void saveAddress (AddressEntity addressEntity) {
         Transaction transaction = null;
-        try (Session session = HibernateUtil.getSessionFactory(AddressEntity.class).openSession()) {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        try {
             // start a transaction
             transaction = session.beginTransaction();
             // save the student object
@@ -18,16 +19,17 @@ public class AddressDao {
             // commit transaction
             transaction.commit();
         } catch (Exception e) {
-        	System.out.println(e.getMessage());
             if (transaction != null) {
                 transaction.rollback();
             }
             e.printStackTrace();
+        } finally {
+        	session.close();
         }
     }
     
     public List <AddressEntity> getAddress() {
-        try (Session session = HibernateUtil.getSessionFactory(AddressEntity.class).openSession()) {
+        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             return session.createQuery("from AddressEntity", AddressEntity.class).list();
         }
     }
