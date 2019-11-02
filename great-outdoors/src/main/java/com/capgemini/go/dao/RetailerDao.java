@@ -4,33 +4,33 @@ import java.util.List;
 
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+
 import com.capgemini.go.entity.RetailerInventoryEntity;
+import com.capgemini.go.entity.WishlistEntity;
 import com.capgemini.go.util.HibernateUtil;
 
-public class RetailerInventoryDao {
-    public void saveProductDetails (RetailerInventoryEntity retInvEntity) {
+public class RetailerDao {
+    public void Wishlist (WishlistEntity wishEntity) {
         Transaction transaction = null;
-        Session session = HibernateUtil.getSessionFactory().openSession();
-        try {
-            // start a transaction
+        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+            
             transaction = session.beginTransaction();
-            // save the student object
-            session.save(retInvEntity);
-            // commit transaction
+           
+            session.save(wishEntity);
+           
             transaction.commit();
+            
         } catch (Exception e) {
             if (transaction != null) {
                 transaction.rollback();
             }
             e.printStackTrace();
-        } finally {
-        	session.close();
         }
     }
     
-    public List <RetailerInventoryEntity> getAllProducts() {
+    public List <WishlistEntity> getAllProducts() {
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
-            return session.createQuery("from RetailerInventoryEntity", RetailerInventoryEntity.class).list();
+            return session.createQuery("from WishlistEntity", WishlistEntity.class).list();
         }
     }
 }

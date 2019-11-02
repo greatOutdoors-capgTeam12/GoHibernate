@@ -7,6 +7,7 @@ import org.hibernate.cfg.Configuration;
 import org.hibernate.cfg.Environment;
 import org.hibernate.service.ServiceRegistry;
 
+import com.capgemini.go.entity.AddressEntity;
 import com.capgemini.go.entity.RetailerInventoryEntity;
 
 public class HibernateUtil {
@@ -26,7 +27,10 @@ public class HibernateUtil {
                 settings.put(Environment.CURRENT_SESSION_CONTEXT_CLASS, "thread");
                 settings.put(Environment.HBM2DDL_AUTO, "create-drop");
                 configuration.setProperties(settings);
+                // Add all classes that need to be mapped here
                 configuration.addAnnotatedClass(RetailerInventoryEntity.class);
+                configuration.addAnnotatedClass(AddressEntity.class);
+                // end of this
                 ServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder()
                     .applySettings(configuration.getProperties()).build();
                 sessionFactory = configuration.buildSessionFactory(serviceRegistry);

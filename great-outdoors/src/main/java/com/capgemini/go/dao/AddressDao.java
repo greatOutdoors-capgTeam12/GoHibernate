@@ -4,18 +4,18 @@ import java.util.List;
 
 import org.hibernate.Session;
 import org.hibernate.Transaction;
-import com.capgemini.go.entity.RetailerInventoryEntity;
+import com.capgemini.go.entity.AddressEntity;
 import com.capgemini.go.util.HibernateUtil;
 
-public class RetailerInventoryDao {
-    public void saveProductDetails (RetailerInventoryEntity retInvEntity) {
+public class AddressDao {
+    public void saveAddress (AddressEntity addressEntity) {
         Transaction transaction = null;
         Session session = HibernateUtil.getSessionFactory().openSession();
         try {
             // start a transaction
             transaction = session.beginTransaction();
             // save the student object
-            session.save(retInvEntity);
+            session.save(addressEntity);
             // commit transaction
             transaction.commit();
         } catch (Exception e) {
@@ -28,9 +28,9 @@ public class RetailerInventoryDao {
         }
     }
     
-    public List <RetailerInventoryEntity> getAllProducts() {
+    public List <AddressEntity> getAddress() {
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
-            return session.createQuery("from RetailerInventoryEntity", RetailerInventoryEntity.class).list();
+            return session.createQuery("from AddressEntity", AddressEntity.class).list();
         }
     }
 }
